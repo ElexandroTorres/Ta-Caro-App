@@ -15,7 +15,7 @@ class TaCaroApp extends StatelessWidget {
     return MaterialApp(
       title: 'Ta Caro App',
       theme: ThemeData(primarySwatch: Colors.green),
-      initialRoute: '/login/create-account',
+      initialRoute: '/login',
       routes: {
         '/splash': (context) => const SplashPage(),
         '/login': (context) => LoginPage(),

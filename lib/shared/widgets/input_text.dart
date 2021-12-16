@@ -5,9 +5,16 @@ import 'package:ta_caro/shared/theme/app_text.dart';
 class InputText extends StatelessWidget {
   final String label;
   final String hint;
+  final bool obscure;
+  final void Function(String)? onChanged;
+  final String? Function(String)? validator;
+
   const InputText({
     required this.label,
     required this.hint,
+    this.obscure = false,
+    this.onChanged,
+    this.validator,
     Key? key,
   }) : super(key: key);
 
@@ -21,6 +28,13 @@ class InputText extends StatelessWidget {
           height: 12,
         ),
         TextFormField(
+          obscureText: obscure,
+          onChanged: onChanged,
+          validator: (value) {
+            if (validator != null) {
+              return validator!(value ?? '');
+            }
+          },
           style: AppTheme.textStyles.input,
           decoration: InputDecoration(
             hintText: hint,

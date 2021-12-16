@@ -9,13 +9,34 @@ class CreateAccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppTheme.colors.background,
+        leading: BackButton(
+          color: AppTheme.colors.backButton,
+        ),
+        elevation: 0,
+      ),
       backgroundColor: AppTheme.colors.background,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'Criando uma conta',
+              style: AppTheme.textStyles.title,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Text(
+              'Mantenha seus gastos em dia',
+              style: AppTheme.textStyles.subtitle,
+            ),
+            SizedBox(
+              height: 16,
+            ),
             InputText(
               label: 'Nome',
               hint: 'Digite o seu nome',
@@ -40,15 +61,10 @@ class CreateAccountPage extends StatelessWidget {
             CustomButton(
               label: 'Criar conta',
               type: ButtonType.fill,
+              onTap: () {},
             ),
             SizedBox(
               height: 16,
-            ),
-            Text(
-              'Ja tem uma conta? faça login',
-              style: TextStyle(
-                fontWeight: FontWeight.w200,
-              ),
             ),
           ],
         ),
