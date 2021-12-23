@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ta_caro/shared/utilities/app_state.dart';
 
-class LoginController {
+class LoginController extends ChangeNotifier {
+  AppState state = AppState.empty();
   final formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
@@ -19,9 +21,20 @@ class LoginController {
     return false;
   }
 
+  void update(AppState state) {
+    this.state = state;
+    notifyListeners();
+  }
+
   void login() {
     if (validate()) {
-      print('ta tudo ok.');
+      try {
+        update(AppState.loading());
+        //CHAMAR O BACKEND
+        update(AppState.sucess<String>('Usuario está logado'));
+      } on Exception catch (e) {
+        update(AppState.error('Deu ruim', e: e));
+      }
     }
   }
 }

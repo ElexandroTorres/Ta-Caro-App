@@ -1,43 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:ta_caro/modules/login/login_controller.dart';
-import 'package:ta_caro/modules/login/pages/create_account/create_account_page.dart';
+import 'package:ta_caro/modules/login/pages/create_account/create_account_controller.dart';
 import 'package:ta_caro/shared/theme/app_theme.dart';
-import 'package:ta_caro/shared/theme/app_text.dart';
 import 'package:ta_caro/shared/widgets/custom_button.dart';
 import 'package:ta_caro/shared/widgets/input_text.dart';
 import 'package:validators/validators.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class CreateAccountPage extends StatefulWidget {
+  const CreateAccountPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<CreateAccountPage> createState() => _CreateAccountPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final controller = LoginController();
-
-  @override
-  void initState() {
-    controller.addListener(() {
-      controller.state.when(
-          sucess: (value) => print('Deu bom'),
-          error: (message, _) => print(message),
-          loading: () => print('loading...'),
-          orElse: () {});
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+class _CreateAccountPageState extends State<CreateAccountPage> {
+  final controller = CreateAccountController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppTheme.colors.background,
+        leading: BackButton(
+          color: AppTheme.colors.backButton,
+        ),
+        elevation: 0,
+      ),
       backgroundColor: AppTheme.colors.background,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -45,12 +32,31 @@ class _LoginPageState extends State<LoginPage> {
           key: controller.formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 200,
-                ),
+              Text(
+                'Criando uma conta',
+                style: AppTheme.textStyles.title,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Mantenha seus gastos em dia',
+                style: AppTheme.textStyles.subtitle,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              InputText(
+                label: 'Nome',
+                hint: 'Digite o seu nome',
+                validator: (value) =>
+                    value.isNotEmpty ? null : 'Insira um nome',
+                onChanged: (value) => controller.onChange(name: value),
+              ),
+              SizedBox(
+                height: 16,
               ),
               InputText(
                 label: 'Email',
@@ -65,31 +71,23 @@ class _LoginPageState extends State<LoginPage> {
               InputText(
                 label: 'Senha',
                 hint: 'Digite a sua senha',
-                obscure: true,
                 validator: (value) =>
-                    value.length >= 6 ? null : 'Digite uma senha maior',
+                    value.length >= 6 ? null : "Digite uma senha maior",
                 onChanged: (value) => controller.onChange(password: value),
               ),
               SizedBox(
                 height: 16,
               ),
               CustomButton(
-                label: 'Entrar',
+                label: 'Criar conta',
                 type: ButtonType.fill,
                 onTap: () {
-                  controller.login();
+                  controller.createAccount();
                 },
               ),
               SizedBox(
-                height: 8,
+                height: 16,
               ),
-              CustomButton(
-                label: 'Criar conta',
-                type: ButtonType.outline,
-                onTap: () {
-                  Navigator.pushNamed(context, '/login/create-account');
-                },
-              )
             ],
           ),
         ),
