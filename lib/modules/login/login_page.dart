@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ta_caro/modules/login/login_controller.dart';
 import 'package:ta_caro/modules/login/pages/create_account/create_account_page.dart';
+import 'package:ta_caro/modules/login/repositories/login_repository_implementation.dart';
+import 'package:ta_caro/shared/services/app_database.dart';
 import 'package:ta_caro/shared/theme/app_theme.dart';
 import 'package:ta_caro/shared/theme/app_text.dart';
 import 'package:ta_caro/shared/widgets/custom_button.dart';
@@ -15,10 +17,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final controller = LoginController();
+  late final LoginController controller;
 
   @override
   void initState() {
+    controller = LoginController(
+        repository: LoginRepository(database: AppDatabase.instance));
     controller.addListener(() {
       controller.state.when(
           sucess: (value) => print('Deu bom'),

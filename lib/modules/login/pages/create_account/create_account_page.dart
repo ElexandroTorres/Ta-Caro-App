@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ta_caro/modules/login/login_controller.dart';
 import 'package:ta_caro/modules/login/pages/create_account/create_account_controller.dart';
+import 'package:ta_caro/modules/login/repositories/login_repository_implementation.dart';
 import 'package:ta_caro/shared/theme/app_theme.dart';
 import 'package:ta_caro/shared/widgets/custom_button.dart';
 import 'package:ta_caro/shared/widgets/input_text.dart';
 import 'package:validators/validators.dart';
+import 'package:ta_caro/shared/services/app_database.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({Key? key}) : super(key: key);
@@ -13,7 +16,14 @@ class CreateAccountPage extends StatefulWidget {
 }
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
-  final controller = CreateAccountController();
+  late final CreateAccountController controller;
+
+  @override
+  void initState() {
+    controller = CreateAccountController(
+        repository: LoginRepository(database: AppDatabase.instance));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
