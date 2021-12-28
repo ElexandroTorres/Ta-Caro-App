@@ -40,13 +40,10 @@ class CreateAccountController extends ChangeNotifier {
     if (validate()) {
       try {
         update(AppState.loading());
-        print('criando conta.');
         final response = await repository.createAccount(
             email: _email, password: _password, name: _name);
-        print('contra criada');
         update(AppState.sucess<UserModel>(response));
       } catch (e) {
-        print('deeuu ruim ${e.toString()}');
         update(AppState.error(e.toString()));
       }
     }

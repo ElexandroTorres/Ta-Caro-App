@@ -22,6 +22,12 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   void initState() {
     controller = CreateAccountController(
         repository: LoginRepository(database: AppDatabase.instance));
+    controller.addListener(() {
+      controller.state.when(
+          sucess: (value) => Navigator.pop(context),
+          error: (message, _) => print(message),
+          orElse: () {});
+    });
     super.initState();
   }
 

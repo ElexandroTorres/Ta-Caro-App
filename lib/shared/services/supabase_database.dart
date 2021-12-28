@@ -11,10 +11,17 @@ class SupaBaseDatabase implements AppDatabase {
 
   @override
   void init() {
+    print('supaurl:  ${String.fromEnvironment('SUPABASEURL')}');
+    print('supakey:  ${String.fromEnvironment('SUPABASEKEY')}');
     client = SupabaseClient(
-      const String.fromEnvironment('SUPABASEURL'),
-      const String.fromEnvironment('SUPABASEKEY'),
+      'https://cchjftviwakphajbpeez.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MDYxOTczOCwiZXhwIjoxOTU2MTk1NzM4fQ.t2JH_ITEY8wGk-nHlfR5oNl0t3DeyFGzDTLWYJ1sm9U',
+      //const String.fromEnvironment("SUPABASEURL"),
+      //const String.fromEnvironment("SUPABASEKEY"),
     );
+    print('Database iniciada');
+    print('supaurl:  ${client.supabaseUrl}');
+    print('supakey:  ${client.supabaseKey}');
   }
 
   @override

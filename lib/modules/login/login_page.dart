@@ -25,7 +25,8 @@ class _LoginPageState extends State<LoginPage> {
         repository: LoginRepository(database: AppDatabase.instance));
     controller.addListener(() {
       controller.state.when(
-          sucess: (value) => print('Deu bom'),
+          sucess: (value) =>
+              Navigator.pushNamed(context, '/home', arguments: value),
           error: (message, _) => print(message),
           loading: () => print('loading...'),
           orElse: () {});

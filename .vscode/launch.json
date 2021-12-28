@@ -9,8 +9,8 @@
             "request": "launch",
             "type": "dart",
             "args": [
-                "--dart-define","SUPABASEURL=https://cchjftviwakphajbpeez.supabase.co",
-                "--dart-define","SUPABASEKY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MDYxOTczOCwiZXhwIjoxOTU2MTk1NzM4fQ.t2JH_ITEY8wGk-nHlfR5oNl0t3DeyFGzDTLWYJ1sm9U"
+                "--dart-define=SUPABASEURL=https://cchjftviwakphajbpeez.supabase.co",
+                "--dart-define=SUPABASEKEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MDYxOTczOCwiZXhwIjoxOTU2MTk1NzM4fQ.t2JH_ITEY8wGk-nHlfR5oNl0t3DeyFGzDTLWYJ1sm9U",
             ]
         },
         {
